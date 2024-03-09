@@ -3,7 +3,7 @@
 ![YeeMon's Architectures-mini-network-infra](https://github.com/yeemon4398/terraform-import/assets/40330106/82626098-d7d6-4428-8df5-18ab2af9e712)
 
 ## Workflow Summary ##
-![YeeMon's Architectures-workflow-summary](https://github.com/yeemon4398/terraform-import/assets/40330106/498fba22-8889-4a24-be20-9c585d38bf2c)
+![YeeMon's Architectures-workflow-summary](https://github.com/yeemon4398/terraform-import/assets/40330106/94deb024-e235-4925-b767-6580816f5b5a)
 <br>
 
 ## Preparation ##
