@@ -29,6 +29,7 @@
 
 #### Create AWS CloudFormation stack to create AWS resources ####
 ```aws cloudformation create-stack --stack-name=<preferred_stack_name> --template-body=file://<your_cloudformation_file_name> --region=<preferred_region> --profile=<aws_cli_profile_name> ```
+
 Need to replace some values based on your side:
 -  ```<preferred_stack_name>``` - can replace your preferred name for AWS CloudFormation stack name
 -  ```<your_cloudformation_file_name>``` - replace with your created AWS CloudFormation template file name
