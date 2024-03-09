@@ -1,0 +1,90 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description:
+  "Mini network infrastructure"
+
+Resources:
+
+# Create a VPC
+  myvpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsHostnames: True
+      EnableDnsSupport: True
+      Tags: 
+        - Key: Name
+          Value: myvpc
+
+# Create an Internet Gateway
+  myigw:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags: 
+        - Key: Name
+          Value: myigw
+
+# Attach the Internet Gateway with VPC
+  attachvpcigw:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId:
+        Ref: myigw
+      VpcId: 
+        Ref: myvpc
+
+# Create a public subnet
+  mypublicsubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: "ap-southeast-1a"
+      CidrBlock: "10.0.1.0/24"
+      MapPublicIpOnLaunch: True
+      Tags: 
+        - Key: "Name"
+          Value: "mypublicsubnet"
+      VpcId: 
+        Ref: myvpc
+
+# Create a private subnet
+  myprivatesubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: "ap-southeast-1a"
+      CidrBlock: "10.0.2.0/24"
+      MapPublicIpOnLaunch: False
+      Tags: 
+        - Key: "Name"
+          Value: "myprivatesubnet"
+      VpcId: 
+        Ref: myvpc
+
+# Create a route table
+  myroutetable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      Tags: 
+        - Key: "Name"
+          Value: "myroutetable"
+      VpcId: 
+        Ref: myvpc
+
+# Add a route to go to the internet
+  publicroute:
+    Type: AWS::EC2::Route
+    Properties:
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: 
+        Ref: myigw
+      RouteTableId: 
+        Ref: myroutetable
+        
+# Associate route table with public subnet
+  snrtassociate:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: 
+        Ref: myroutetable
+      SubnetId: 
+        Ref: mypublicsubnet
