@@ -95,5 +95,14 @@ Command: ```terraform import <resource_name>.<logical_name> <actual_resource_ID>
 ![image](https://github.com/yeemon4398/terraform-import/assets/40330106/2344bbcb-e297-4486-b712-baa632ea0844)
 <br>
 
-#### Verify on AWS ####
+### Verify on AWS ###
 ![image](https://github.com/yeemon4398/terraform-import/assets/40330106/3de94709-e1e7-4c84-b7b4-acdc31b684f4)
+<br>
+
+### terraform destroy and verify ###
+![image](https://github.com/yeemon4398/terraform-import/assets/40330106/8b2b62ba-3992-4e9d-b976-cee427e4c79a)
+<br>
+![image](https://github.com/yeemon4398/terraform-import/assets/40330106/b6ec78c0-2c19-4af3-9f6a-3d42db8887ed)
+
+### Verify on AWS ###
+- We can see that the AWS CloudFormation stack will still exist but resources are now managed by Terraform and destroyed.
