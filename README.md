@@ -1,9 +1,10 @@
 # Make existing AWS resources to be managed by Terraform #
-## Architecture ##
+## Mini Network Infrastructure ##
 ![YeeMon's Architectures-mini-network-infra](https://github.com/yeemon4398/terraform-import/assets/40330106/82626098-d7d6-4428-8df5-18ab2af9e712)
 
 ## Workflow Summary ##
-
+![YeeMon's Architectures-workflow-summary](https://github.com/yeemon4398/terraform-import/assets/40330106/498fba22-8889-4a24-be20-9c585d38bf2c)
+<br>
 
 ## Preparation ##
 ### Included platforms and services ###
@@ -21,18 +22,18 @@
 - Terraform CLI installation [https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli]
 <br>
 
-### Create a mini network infra using AWS CloudFormation (Can create manually from the console also) ###
+### Create a mini network infra using AWS CloudFormation (Can also create manually from the console) ###
 #### My mini network infra reference link ####
 - [mini-network-infra-cloudformation.yaml](https://github.com/yeemon4398/terraform-import/blob/main/mini-network-infra-cloudformation.yaml)
 <br>
 
 #### Create AWS CloudFormation stack to create AWS resources ####
-- Command: aws cloudformation create-stack --stack-name=<preferred_stack_name> --template-body=file://<your_cloudformation_file_name> --region=<preferred_region> --profile=<aws_cli_profile_name> 
-- Need to replace some values based on your side:
-  -  <preferred_stack_name> - can replace your preferred name for AWS CloudFormation stack name
-  -  <your_cloudformation_file_name> - replace with your created AWS CloudFormation template file name
-  -  <preferred_region> - can replace your desired region name and need to match with availability zones in the AWS CloudFormation template
-  -  <aws_cli_profile_name> - replace with your created AWS CLI profile name
+```aws cloudformation create-stack --stack-name=<preferred_stack_name> --template-body=file://<your_cloudformation_file_name> --region=<preferred_region> --profile=<aws_cli_profile_name> ```
+Need to replace some values based on your side:
+-  ```<preferred_stack_name>``` - can replace your preferred name for AWS CloudFormation stack name
+-  ```<your_cloudformation_file_name>``` - replace with your created AWS CloudFormation template file name
+-  ```<preferred_region>``` - can replace your desired region name and need to match with availability zones in the AWS CloudFormation template
+-  ```<aws_cli_profile_name>``` - replace with your created AWS CLI profile name
 <br>
 
 #### Verify resources on AWS ####
@@ -49,22 +50,50 @@
 - Check each existing resource and explore each configuration
 <br>
 
-### Prepare Terraform configuration files based on existing resources ###
-#### My Terraform configuration files ####
-- [terraform-config-files](https://github.com/yeemon4398/terraform-import/tree/main/terraform-config-files)
-
+### Prepare Terraform configuration files mapping with existing resources ###
+Reference link: [terraform-config-files](https://github.com/yeemon4398/terraform-import/tree/main/terraform-config-files)
+<br>
+<br>
 ### Initialize Terraform ###
-- Command: terraform init
+Command: ```terraform init```
 <br>
 ![image](https://github.com/yeemon4398/terraform-import/assets/40330106/aac711e3-23d3-4e77-85b1-642524a358d2)
 <br>
 
 ### Import each resource to be managed by Terraform ###
-- Command: terraform import <resource_name>.<logical_name> <actual_resource_ID>
+Command: ```terraform import <resource_name>.<logical_name> <actual_resource_ID>```
 <br>
 
-#### VPC ###
+#### VPC ####
 ![image](https://github.com/yeemon4398/terraform-import/assets/40330106/54da7cdc-aeea-45f8-bb6e-f1124044b405)
 <br>
 
+#### Internet Gateway ####
+![image](https://github.com/yeemon4398/terraform-import/assets/40330106/3d6e431e-af8f-4829-ba98-3334e6c1a941)
+<br>
 
+#### Subnets ####
+![image](https://github.com/yeemon4398/terraform-import/assets/40330106/8b5fa614-2a4d-421c-ab06-ef9de8faccdb)
+<br>
+
+![image](https://github.com/yeemon4398/terraform-import/assets/40330106/2022b87e-4589-4cfa-9f0a-5272d2c2bc2c)
+<br>
+
+#### Route Table ####
+![image](https://github.com/yeemon4398/terraform-import/assets/40330106/c866d8c5-06c0-4743-a7a9-ae07a3de6745)
+<br>
+
+## Verification ##
+### Change something at the Terraform configuration file and test ###
+#### Add a tag and apply changes ####
+![image](https://github.com/yeemon4398/terraform-import/assets/40330106/94b85872-5cf1-469e-8042-e7daa915eca8)
+<br>
+![image](https://github.com/yeemon4398/terraform-import/assets/40330106/b6e234f7-41bd-48b2-a850-a61f44c4202e)
+<br>
+![image](https://github.com/yeemon4398/terraform-import/assets/40330106/5a648ab8-8c2e-4856-801a-2ead7695fbfd)
+<br>
+![image](https://github.com/yeemon4398/terraform-import/assets/40330106/2344bbcb-e297-4486-b712-baa632ea0844)
+<br>
+
+#### Verify on AWS ####
+![image](https://github.com/yeemon4398/terraform-import/assets/40330106/3de94709-e1e7-4c84-b7b4-acdc31b684f4)
